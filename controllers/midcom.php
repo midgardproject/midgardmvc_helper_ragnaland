@@ -86,12 +86,42 @@ class midcom_helper_ragnaland_controllers_midcom
         
         $_MIDGARD_CONNECTION = $midgardmvc->dispatcher->get_midgard_connection();
     }
-    
+
+    /**
+     * Match midgard_error log levels to MidCOM 8.09 levels
+     *
+     * @param string $log_level midgard_error log level
+     * @return int
+     */
+    private function midgardmvc_loglevel_to_midcom($log_level)
+    {
+        switch ($log_level)
+        {
+            case 'debug':
+                // MIDCOM_LOG_DEBUG
+                return 4;
+            case 'message':
+            case 'info':
+                // MIDCOM_LOG_INFO
+                return 3;
+            case 'warning':
+                // MIDCOM_LOG_WARN
+                return 2;
+            case 'error':
+                // MIDCOM_LOG_ERROR
+                return 1;
+            case 'critical':
+                // MIDCOM_LOG_CRIT
+                return 0;
+        }
+        return 0;
+    }
+  
     private function prepare_midcom_config()
     {
         $GLOBALS['midcom_config_local'] = array();
         $GLOBALS['midcom_config_local']['log_filename'] = '/home/bergie/devel/runtime/project/log/ragnaroek.log';
-        $GLOBALS['midcom_config_local']['log_level'] = 5;
+        $GLOBALS['midcom_config_local']['log_level'] = $this->midgardmvc_loglevel_to_midcom(midcom_core_midcom::get_instance()->configuration->log_level);
         $GLOBALS['midcom_config_local']['midcom_root_topic_guid'] = $this->get_midcom_root_topic_guid();
         $GLOBALS['midcom_config_local']['midcom_services_rcs_enable'] = false;
         
