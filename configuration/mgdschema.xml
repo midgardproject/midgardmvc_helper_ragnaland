@@ -158,7 +158,7 @@
         </property>
     </type>
 
-    <type name="midcom_core_group_virtual_db" table="midcom_group_virtual">
+    <type name="midgardmvc_core_group_virtual_db" table="midcom_group_virtual">
         <property name="id" type="unsigned integer" primaryfield="id">
             <description>Local non-replication-safe database identifier</description>
         </property>
@@ -173,7 +173,7 @@
         </property>
     </type>
 
-    <type name="midcom_core_privilege_db" table="midcom_core_privilege">
+    <type name="midgardmvc_core_privilege_db" table="midgardmvc_core_privilege">
         <property name="id" type="unsigned integer" primaryfield="id">
             <description>Local non-replication-safe database identifier</description>
         </property>
@@ -193,14 +193,14 @@
             <description>
                 Value of the privilege:
                 
-                - 1: MIDCOM_PRIVILEGE_ALLOW
-                - 2: MIDCOM_PRIVILEGE_DENY
-                - 3: MIDCOM_PRIVILEGE_INHERIT
+                - 1: MIDGARDMVC_PRIVILEGE_ALLOW
+                - 2: MIDGARDMVC_PRIVILEGE_DENY
+                - 3: MIDGARDMVC_PRIVILEGE_INHERIT
             </description>
         </property>  
     </type>
 
-    <type name="midcom_core_login_session_db" table="midcom_core_login_session">
+    <type name="midgardmvc_core_login_session_db" table="midgardmvc_core_login_session">
         <property name="id" type="unsigned integer" primaryfield="id">
             <description>Local non-replication-safe database identifier</description>
         </property>
@@ -224,7 +224,7 @@
         </property>
     </type>
 
-    <type name="midcom_core_temporary_object_db" table="midcom_core_temporary_object_db">
+    <type name="midgardmvc_core_temporary_object_db" table="midgardmvc_core_temporary_object_db">
         <property name="id" type="unsigned integer" primaryfield="id">
             <description>Local non-replication-safe database identifier</description>
         </property>

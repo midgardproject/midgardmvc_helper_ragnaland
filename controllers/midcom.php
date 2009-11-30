@@ -11,9 +11,9 @@
  *
  * @package org_routamc_positioning
  */
-class midcom_helper_ragnaland_controllers_midcom
+class midgardmvc_helper_ragnaland_controllers_midcom
 {
-    public function __construct(midcom_core_component_interface $instance)
+    public function __construct(midgardmvc_core_component_interface $instance)
     {
         $this->configuration = $instance->configuration;
     }
@@ -25,7 +25,7 @@ class midcom_helper_ragnaland_controllers_midcom
      */
     private function prepare_midgard_superglobal()
     {
-        $midgardmvc = midcom_core_midcom::get_instance();
+        $midgardmvc = midgardmvc_core_midcom::get_instance();
         $_MIDGARD = array();
         
         // User information
@@ -98,20 +98,20 @@ class midcom_helper_ragnaland_controllers_midcom
         switch ($log_level)
         {
             case 'debug':
-                // MIDCOM_LOG_DEBUG
+                // MIDGARDMVC_LOG_DEBUG
                 return 4;
             case 'message':
             case 'info':
-                // MIDCOM_LOG_INFO
+                // MIDGARDMVC_LOG_INFO
                 return 3;
             case 'warning':
-                // MIDCOM_LOG_WARN
+                // MIDGARDMVC_LOG_WARN
                 return 2;
             case 'error':
-                // MIDCOM_LOG_ERROR
+                // MIDGARDMVC_LOG_ERROR
                 return 1;
             case 'critical':
-                // MIDCOM_LOG_CRIT
+                // MIDGARDMVC_LOG_CRIT
                 return 0;
         }
         return 0;
@@ -121,11 +121,11 @@ class midcom_helper_ragnaland_controllers_midcom
     {
         $GLOBALS['midcom_config_local'] = array();
         $GLOBALS['midcom_config_local']['log_filename'] = '/home/bergie/devel/runtime/project/log/ragnaroek.log';
-        $GLOBALS['midcom_config_local']['log_level'] = $this->midgardmvc_loglevel_to_midcom(midcom_core_midcom::get_instance()->configuration->log_level);
+        $GLOBALS['midcom_config_local']['log_level'] = $this->midgardmvc_loglevel_to_midcom(midgardmvc_core_midcom::get_instance()->configuration->log_level);
         $GLOBALS['midcom_config_local']['midcom_root_topic_guid'] = $this->get_midcom_root_topic_guid();
         $GLOBALS['midcom_config_local']['midcom_services_rcs_enable'] = false;
         
-        if (midcom_core_midcom::get_instance()->firephp)
+        if (midgardmvc_core_midcom::get_instance()->firephp)
         {
             // Enable FirePHP in MidCOM 8.09 too
             $GLOBALS['midcom_config_local']['log_firephp'] = true;
@@ -135,7 +135,7 @@ class midcom_helper_ragnaland_controllers_midcom
     private function get_midcom_root_topic_guid()
     {
         $qb = new midgard_query_builder('midgard_topic');
-        $qb->add_constraint('name', '=', midcom_core_midcom::get_instance()->context->page->guid);
+        $qb->add_constraint('name', '=', midgardmvc_core_midcom::get_instance()->context->page->guid);
         $topics = $qb->execute();
         if ($topics)
         {
@@ -145,10 +145,10 @@ class midcom_helper_ragnaland_controllers_midcom
         // Create a new root topic for MidCOM 8.09
         // The convention is that the root topic's name matches GUID of the page used to run MidCOM
         $topic = new midgard_topic();
-        $topic->name = midcom_core_midcom::get_instance()->context->page->guid;
+        $topic->name = midgardmvc_core_midcom::get_instance()->context->page->guid;
         $topic->component = 'net.nehmer.static';
-        $topic->extra = midcom_core_midcom::get_instance()->context->page->guid;
-        $topic->title = midcom_core_midcom::get_instance()->context->page->guid;
+        $topic->extra = midgardmvc_core_midcom::get_instance()->context->page->guid;
+        $topic->title = midgardmvc_core_midcom::get_instance()->context->page->guid;
         $topic->create();
         return $topic->guid;
     }
@@ -160,9 +160,9 @@ class midcom_helper_ragnaland_controllers_midcom
             throw new Exception('For now you need to set midgard.superglobals_compat=On in your php.ini to run MidCOM3 on Mjolnir');
         }
 
-        if (!defined('MIDCOM_ROOT'))
+        if (!defined('MIDGARDMVC_ROOT'))
         {
-            define('MIDCOM_ROOT', MIDGARDMVC_ROOT . '/ragnaroek/lib');
+            define('MIDGARDMVC_ROOT', MIDGARDMVC_ROOT . '/ragnaroek/lib');
         }
         $this->prepare_midgard_superglobal();
         $this->prepare_midcom_config();
@@ -171,7 +171,7 @@ class midcom_helper_ragnaland_controllers_midcom
         
         if (!function_exists('mgd_register_filter'))
         {
-            require(MIDGARDMVC_ROOT . '/midcom_helper_ragnaland/utils.php');
+            require(MIDGARDMVC_ROOT . '/midgardmvc_helper_ragnaland/utils.php');
         }
         
         try
@@ -179,7 +179,7 @@ class midcom_helper_ragnaland_controllers_midcom
             //unset($_MIDCOM);
             
             // Load Ragnaroek MidCOM
-            require_once MIDCOM_ROOT . '/midcom.php';
+            require_once MIDGARDMVC_ROOT . '/midcom.php';
 
             // Run request processing
             $_MIDCOM->codeinit();

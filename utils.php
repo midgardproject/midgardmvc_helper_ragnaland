@@ -26,17 +26,17 @@ function mgd_element($name)
     $element = $name[1];
 
     // Sensible fallback if we don't have a style or ROOT element
-    $root_fallback = '<html><head><?php $_MIDCOM->print_head_elements(); ?><title><?php echo $_MIDCOM->get_context_data(MIDCOM_CONTEXT_PAGETITLE); ?></title></head><body><?php $_MIDCOM->content(); $_MIDCOM->uimessages->show(); $_MIDCOM->toolbars->show(); ?></body></html>';
+    $root_fallback = '<html><head><?php $_MIDCOM->print_head_elements(); ?><title><?php echo $_MIDCOM->get_context_data(MIDGARDMVC_CONTEXT_PAGETITLE); ?></title></head><body><?php $_MIDCOM->content(); $_MIDCOM->uimessages->show(); $_MIDCOM->toolbars->show(); ?></body></html>';
 
     switch ($element)
     {
         case 'title':
         case 'content':
-            return midcom_core_midcom::get_instance()->context->page->$element;
+            return midgardmvc_core_midcom::get_instance()->context->page->$element;
             break;
         default:
             // TODO: Element inheritance, page elements
-            if (!isset(midcom_core_midcom::get_instance()->context->style))
+            if (!isset(midgardmvc_core_midcom::get_instance()->context->style))
             {
                 if ($element == 'ROOT')
                 {
@@ -44,7 +44,7 @@ function mgd_element($name)
                 }
                 return '';
             }
-            $style = midcom_core_midcom::get_instance()->context->style;
+            $style = midgardmvc_core_midcom::get_instance()->context->style;
             $qb = new midgard_query_builder('midgard_element');
             $qb->add_constraint('name', '=', $element);
             $qb->add_constraint('style', '=', $style->id);

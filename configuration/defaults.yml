@@ -1,6 +1,6 @@
 routes:
     ragnaland_midcom_front:
-        controller: midcom_helper_ragnaland_controllers_midcom
+        controller: midgardmvc_helper_ragnaland_controllers_midcom
         action: run
         route: '/'
         allowed_methods:
@@ -8,7 +8,7 @@ routes:
             - POST
         template_entry_point: mhr-show-midcom
     ragnaland_midcom:
-        controller: midcom_helper_ragnaland_controllers_midcom
+        controller: midgardmvc_helper_ragnaland_controllers_midcom
         action: run
         route: '@'
         allowed_methods:
