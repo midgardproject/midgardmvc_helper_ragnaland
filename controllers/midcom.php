@@ -94,6 +94,12 @@ class midcom_helper_ragnaland_controllers_midcom
         $GLOBALS['midcom_config_local']['log_level'] = 5;
         $GLOBALS['midcom_config_local']['midcom_root_topic_guid'] = $this->get_midcom_root_topic_guid();
         $GLOBALS['midcom_config_local']['midcom_services_rcs_enable'] = false;
+        
+        if (midcom_core_midcom::get_instance()->firephp)
+        {
+            // Enable FirePHP in MidCOM 8.09 too
+            $GLOBALS['midcom_config_local']['log_firephp'] = true;
+        }
     }
     
     private function get_midcom_root_topic_guid()
@@ -162,7 +168,7 @@ class midcom_helper_ragnaland_controllers_midcom
     {
         $this->initialize_midcom();  
         // Run Ragnaroek pseudo-templating
-        eval('?>' . mgd_preparse_compat('<(ROOT)>'));
+        eval('?>' . mgd_preparse('<(ROOT)>'));
         die();
     }
 

@@ -80,9 +80,8 @@ function mgd_variable($variable)
  * Preparse a string to handle element inclusion and variable 
  *
  * @see mgd_preparse
- * @see http://trac.midgard-project.org/ticket/1222
  */
-function mgd_preparse_compat($code)
+function mgd_preparse($code)
 {
     // Get style elements
     $code = preg_replace_callback("/<\\(([a-zA-Z0-9 _-]+)\\)>/", 'mgd_element', $code);
