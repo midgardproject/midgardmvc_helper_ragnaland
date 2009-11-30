@@ -29,7 +29,6 @@ class midcom_helper_ragnaland_controllers_midcom
         $_MIDGARD = array();
         
         // User information
-        // TODO: Sync from authentication framework
         if ($midgardmvc->authentication->is_user())
         {
             $_MIDGARD['user'] = $midgardmvc->authentication->get_person()->id;
@@ -60,7 +59,6 @@ class midcom_helper_ragnaland_controllers_midcom
         $_MIDGARD['page'] = $midgardmvc->context->page->id;
         $_MIDGARD['debug'] = false;
         
-        // TODO: missing stuff
         $_MIDGARD['host'] = null;
         $_MIDGARD['style'] = null;
         $_MIDGARD['config'] = array
@@ -68,6 +66,8 @@ class midcom_helper_ragnaland_controllers_midcom
             'prefix' => '',
             'multilang' => false,
             'quota' => false,
+            'sitegroup' => false,
+            'ragnaland' => true,
         );
 
         $_MIDGARD['types'] = array();
@@ -122,7 +122,10 @@ class midcom_helper_ragnaland_controllers_midcom
             throw new Exception('For now you need to set midgard.superglobals_compat=On in your php.ini to run MidCOM3 on Mjolnir');
         }
 
-        define('MIDCOM_ROOT', MIDGARDMVC_ROOT . '/ragnaroek/lib');
+        if (!defined('MIDCOM_ROOT'))
+        {
+            define('MIDCOM_ROOT', MIDGARDMVC_ROOT . '/ragnaroek/lib');
+        }
         $this->prepare_midgard_superglobal();
         $this->prepare_midcom_config();
         
@@ -135,17 +138,18 @@ class midcom_helper_ragnaland_controllers_midcom
         
         try
         {
-            unset($_MIDCOM);
+            //unset($_MIDCOM);
             
             // Load Ragnaroek MidCOM
-            require MIDCOM_ROOT . '/midcom.php';
+            require_once MIDCOM_ROOT . '/midcom.php';
 
             // Run request processing
             $_MIDCOM->codeinit();
         }
         catch (Exception $e)
         {
-            var_dump($e);
+            // TODO: In some cases we may want to recast exceptions
+            throw $e;
         }
     }
 
