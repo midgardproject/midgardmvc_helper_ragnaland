@@ -81,7 +81,9 @@ class midcom_helper_ragnaland_controllers_midcom
             'types' => $_MIDGARD['types'],
         );
         
-        $_MIDGARD['unique_host_name'] = $midgardmvc->templating->get_cache_identifier();
+        $_MIDGARD['config']['unique_host_name'] = $midgardmvc->templating->get_cache_identifier();
+        $_MIDGARD['config']['auth_cookie_id'] = $midgardmvc->context->page->id;
+        
         $_MIDGARD_CONNECTION = $midgardmvc->dispatcher->get_midgard_connection();
     }
     
