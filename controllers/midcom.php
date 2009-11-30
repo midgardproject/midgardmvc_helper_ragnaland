@@ -123,7 +123,7 @@ class midgardmvc_helper_ragnaland_controllers_midcom
         $GLOBALS['midcom_config_local']['log_filename'] = '/home/bergie/devel/runtime/project/log/ragnaroek.log';
         $GLOBALS['midcom_config_local']['log_level'] = $this->midgardmvc_loglevel_to_midcom(midgardmvc_core::get_instance()->configuration->log_level);
         $GLOBALS['midcom_config_local']['midcom_root_topic_guid'] = $this->get_midcom_root_topic_guid();
-        $GLOBALS['midcom_config_local']['midcom_services_rcs_enable'] = false;
+        $GLOBALS['midcom_config_local']['midgardmvc_services_rcs_enable'] = false;
         
         if (midgardmvc_core::get_instance()->firephp)
         {
