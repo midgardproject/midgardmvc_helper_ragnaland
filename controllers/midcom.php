@@ -176,13 +176,13 @@ class midgardmvc_helper_ragnaland_controllers_midcom
         
         try
         {
-            //unset($_MIDCOM);
+            //unset(midgardmvc_core::get_instance());
             
             // Load Ragnaroek MidCOM
             require_once MIDGARDMVC_ROOT . '/midcom.php';
 
             // Run request processing
-            $_MIDCOM->codeinit();
+            midgardmvc_core::get_instance()->codeinit();
         }
         catch (Exception $e)
         {
