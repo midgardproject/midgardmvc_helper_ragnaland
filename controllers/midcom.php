@@ -60,7 +60,8 @@ class midcom_helper_ragnaland_controllers_midcom
         $_MIDGARD['debug'] = false;
         
         $_MIDGARD['host'] = null;
-        $_MIDGARD['style'] = null;
+        $_MIDGARD['style'] = $midgardmvc->context->style_id;
+        $_MIDGARD['author'] = 0;
         $_MIDGARD['config'] = array
         (
             'prefix' => '',
@@ -70,17 +71,16 @@ class midcom_helper_ragnaland_controllers_midcom
             'ragnaland' => true,
         );
 
-        $_MIDGARD['types'] = array();
+        $_MIDGARD['schema'] = array
+        (
+            'types' => array(),
+        );
         $types = $midgardmvc->dispatcher->get_mgdschema_classes();
         foreach ($types as $type)
         {
-            $_MIDGARD['types'][$type] = array();
+            $_MIDGARD['schema']['types'][$type] = '';
         }
-        $_MIDGARD['schema'] = array
-        (
-            'types' => $_MIDGARD['types'],
-        );
-        
+
         $_MIDGARD['config']['unique_host_name'] = $midgardmvc->templating->get_cache_identifier();
         $_MIDGARD['config']['auth_cookie_id'] = $midgardmvc->context->page->id;
         
