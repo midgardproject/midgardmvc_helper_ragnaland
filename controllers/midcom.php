@@ -25,7 +25,7 @@ class midgardmvc_helper_ragnaland_controllers_midcom
      */
     private function prepare_midgard_superglobal()
     {
-        $midgardmvc = midgardmvc_core_midcom::get_instance();
+        $midgardmvc = midgardmvc_core::get_instance();
         $_MIDGARD = array();
         
         // User information
@@ -121,11 +121,11 @@ class midgardmvc_helper_ragnaland_controllers_midcom
     {
         $GLOBALS['midcom_config_local'] = array();
         $GLOBALS['midcom_config_local']['log_filename'] = '/home/bergie/devel/runtime/project/log/ragnaroek.log';
-        $GLOBALS['midcom_config_local']['log_level'] = $this->midgardmvc_loglevel_to_midcom(midgardmvc_core_midcom::get_instance()->configuration->log_level);
+        $GLOBALS['midcom_config_local']['log_level'] = $this->midgardmvc_loglevel_to_midcom(midgardmvc_core::get_instance()->configuration->log_level);
         $GLOBALS['midcom_config_local']['midcom_root_topic_guid'] = $this->get_midcom_root_topic_guid();
         $GLOBALS['midcom_config_local']['midcom_services_rcs_enable'] = false;
         
-        if (midgardmvc_core_midcom::get_instance()->firephp)
+        if (midgardmvc_core::get_instance()->firephp)
         {
             // Enable FirePHP in MidCOM 8.09 too
             $GLOBALS['midcom_config_local']['log_firephp'] = true;
@@ -135,7 +135,7 @@ class midgardmvc_helper_ragnaland_controllers_midcom
     private function get_midcom_root_topic_guid()
     {
         $qb = new midgard_query_builder('midgard_topic');
-        $qb->add_constraint('name', '=', midgardmvc_core_midcom::get_instance()->context->page->guid);
+        $qb->add_constraint('name', '=', midgardmvc_core::get_instance()->context->page->guid);
         $topics = $qb->execute();
         if ($topics)
         {
@@ -145,10 +145,10 @@ class midgardmvc_helper_ragnaland_controllers_midcom
         // Create a new root topic for MidCOM 8.09
         // The convention is that the root topic's name matches GUID of the page used to run MidCOM
         $topic = new midgard_topic();
-        $topic->name = midgardmvc_core_midcom::get_instance()->context->page->guid;
+        $topic->name = midgardmvc_core::get_instance()->context->page->guid;
         $topic->component = 'net.nehmer.static';
-        $topic->extra = midgardmvc_core_midcom::get_instance()->context->page->guid;
-        $topic->title = midgardmvc_core_midcom::get_instance()->context->page->guid;
+        $topic->extra = midgardmvc_core::get_instance()->context->page->guid;
+        $topic->title = midgardmvc_core::get_instance()->context->page->guid;
         $topic->create();
         return $topic->guid;
     }

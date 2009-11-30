@@ -32,11 +32,11 @@ function mgd_element($name)
     {
         case 'title':
         case 'content':
-            return midgardmvc_core_midcom::get_instance()->context->page->$element;
+            return midgardmvc_core::get_instance()->context->page->$element;
             break;
         default:
             // TODO: Element inheritance, page elements
-            if (!isset(midgardmvc_core_midcom::get_instance()->context->style))
+            if (!isset(midgardmvc_core::get_instance()->context->style))
             {
                 if ($element == 'ROOT')
                 {
@@ -44,7 +44,7 @@ function mgd_element($name)
                 }
                 return '';
             }
-            $style = midgardmvc_core_midcom::get_instance()->context->style;
+            $style = midgardmvc_core::get_instance()->context->style;
             $qb = new midgard_query_builder('midgard_element');
             $qb->add_constraint('name', '=', $element);
             $qb->add_constraint('style', '=', $style->id);
