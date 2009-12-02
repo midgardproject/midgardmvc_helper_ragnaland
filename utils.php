@@ -26,7 +26,7 @@ function mgd_element($name)
     $element = $name[1];
 
     // Sensible fallback if we don't have a style or ROOT element
-    $root_fallback = '<html><head><?php midgardmvc_core::get_instance()->print_head_elements(); ?><title><?php echo midgardmvc_core::get_instance()->get_context_data(MIDGARDMVC_CONTEXT_PAGETITLE); ?></title></head><body><?php midgardmvc_core::get_instance()->content(); midgardmvc_core::get_instance()->uimessages->show(); midgardmvc_core::get_instance()->toolbars->show(); ?></body></html>';
+    $root_fallback = '<html><head><?php $_MIDCOM->print_head_elements(); ?><title><?php echo $_MIDCOM->get_context_data(MIDCOM_CONTEXT_PAGETITLE); ?></title></head><body><?php $_MIDCOM->content(); $_MIDCOM->uimessages->show(); $_MIDCOM->toolbars->show(); ?></body></html>';
 
     switch ($element)
     {

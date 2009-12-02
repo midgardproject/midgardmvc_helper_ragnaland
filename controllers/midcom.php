@@ -98,20 +98,20 @@ class midgardmvc_helper_ragnaland_controllers_midcom
         switch ($log_level)
         {
             case 'debug':
-                // MIDGARDMVC_LOG_DEBUG
+                // MIDCOM_LOG_DEBUG
                 return 4;
             case 'message':
             case 'info':
-                // MIDGARDMVC_LOG_INFO
+                // MIDCOM_LOG_INFO
                 return 3;
             case 'warning':
-                // MIDGARDMVC_LOG_WARN
+                // MIDCOM_LOG_WARN
                 return 2;
             case 'error':
-                // MIDGARDMVC_LOG_ERROR
+                // MIDCOM_LOG_ERROR
                 return 1;
             case 'critical':
-                // MIDGARDMVC_LOG_CRIT
+                // MIDCOM_LOG_CRIT
                 return 0;
         }
         return 0;
@@ -157,12 +157,17 @@ class midgardmvc_helper_ragnaland_controllers_midcom
     {
         if (!ini_get('midgard.superglobals_compat'))
         {
-            throw new Exception('For now you need to set midgard.superglobals_compat=On in your php.ini to run MidCOM3 on Mjolnir');
+            throw new Exception('You need to set midgard.superglobals_compat=On in your php.ini to run MidCOM 8.09 on Midgard MVC');
+        }
+        
+        if (!class_exists('midgard_topic'))
+        {
+            throw new Exception('You need to install midgardmvc_helper_ragnaland MgdSchemas from configuration/mgdschema.xml to run MidCOM 8.09 on Midgard MVC');
         }
 
-        if (!defined('MIDGARDMVC_ROOT'))
+        if (!defined('MIDCOM_ROOT'))
         {
-            define('MIDGARDMVC_ROOT', MIDGARDMVC_ROOT . '/ragnaroek/lib');
+            define('MIDCOM_ROOT', MIDGARDMVC_ROOT . '/ragnaroek/lib');
         }
         $this->prepare_midgard_superglobal();
         $this->prepare_midcom_config();
@@ -176,13 +181,13 @@ class midgardmvc_helper_ragnaland_controllers_midcom
         
         try
         {
-            //unset(midgardmvc_core::get_instance());
+            //unset($_MIDCOM);
             
             // Load Ragnaroek MidCOM
-            require_once MIDGARDMVC_ROOT . '/midcom.php';
+            require_once MIDCOM_ROOT . '/midcom.php';
 
             // Run request processing
-            midgardmvc_core::get_instance()->codeinit();
+            $_MIDCOM->codeinit();
         }
         catch (Exception $e)
         {
