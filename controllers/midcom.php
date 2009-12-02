@@ -83,7 +83,7 @@ class midgardmvc_helper_ragnaland_controllers_midcom
 
         $_MIDGARD['config']['unique_host_name'] = $midgardmvc->templating->get_cache_identifier();
         $_MIDGARD['config']['auth_cookie_id'] = $midgardmvc->context->page->id;
-        
+
         $_MIDGARD_CONNECTION = $midgardmvc->dispatcher->get_midgard_connection();
     }
 
@@ -123,7 +123,7 @@ class midgardmvc_helper_ragnaland_controllers_midcom
         $GLOBALS['midcom_config_local']['log_filename'] = '/home/bergie/devel/runtime/project/log/ragnaroek.log';
         $GLOBALS['midcom_config_local']['log_level'] = $this->midgardmvc_loglevel_to_midcom(midgardmvc_core::get_instance()->configuration->log_level);
         $GLOBALS['midcom_config_local']['midcom_root_topic_guid'] = $this->get_midcom_root_topic_guid();
-        $GLOBALS['midcom_config_local']['midgardmvc_services_rcs_enable'] = false;
+        $GLOBALS['midcom_config_local']['midcom_services_rcs_enable'] = false;
         
         if (midgardmvc_core::get_instance()->firephp)
         {
@@ -181,7 +181,8 @@ class midgardmvc_helper_ragnaland_controllers_midcom
         
         try
         {
-            //unset($_MIDCOM);
+            // Send reasonable default content type, MidCOM may still override this
+            header('Content-type: text/html; charset=utf-8');
             
             // Load Ragnaroek MidCOM
             require_once MIDCOM_ROOT . '/midcom.php';
@@ -201,7 +202,7 @@ class midgardmvc_helper_ragnaland_controllers_midcom
      */
     public function get_run(array $args)
     {
-        $this->initialize_midcom();  
+        $this->initialize_midcom();
         // Run Ragnaroek pseudo-templating
         eval('?>' . mgd_preparse('<(ROOT)>'));
         die();
