@@ -1,5 +1,5 @@
 routes:
-    page_read:
+    ragnaland_midcom_front:
         controller: midgardmvc_helper_ragnaland_controllers_midcom
         action: run
         route: '/'

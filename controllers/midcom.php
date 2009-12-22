@@ -49,7 +49,7 @@ class midgardmvc_helper_ragnaland_controllers_midcom
         // URLs and request path
         $_MIDGARD['uri'] = $midgardmvc->context->uri;
         $_MIDGARD['self'] = $midgardmvc->context->self;
-        $_MIDGARD['prefix'] = $midgardmvc->context->prefix;
+        $_MIDGARD['prefix'] = substr($midgardmvc->context->self, 0, -1);
         $_MIDGARD['argv'] = $midgardmvc->context->argv;
         $_MIDGARD['argc'] = count($_MIDGARD['argv']);
         
