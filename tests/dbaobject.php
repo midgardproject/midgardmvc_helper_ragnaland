@@ -23,6 +23,11 @@ class midgardmvc_helper_ragnaland_tests_dbaobject extends midgardmvc_tests_testc
         $mgdschema_methods = $mgdschema->getMethods();
         foreach ($mgdschema_methods as $key => $method)
         {
+            if ($method->name == 'list')
+            {
+                // Skip, "list" is a reserved PHP method name
+                continue;
+            }
             $this->assertTrue(method_exists('midcom_core_dbaobject', $method->name), "Method {$method->name} must be defined in midcom_core_dbaobject");
         }
     }
