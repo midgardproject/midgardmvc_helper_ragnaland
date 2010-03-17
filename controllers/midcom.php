@@ -85,6 +85,8 @@ class midgardmvc_helper_ragnaland_controllers_midcom
         $_MIDGARD['config']['auth_cookie_id'] = $midgardmvc->context->page->id;
 
         $_MIDGARD_CONNECTION = $midgardmvc->dispatcher->get_midgard_connection();
+        
+        $_GET = $midgardmvc->context->query;
     }
 
     /**
@@ -203,6 +205,7 @@ class midgardmvc_helper_ragnaland_controllers_midcom
     public function get_run(array $args)
     {
         $this->initialize_midcom();
+        
         // Run Ragnaroek pseudo-templating
         eval('?>' . mgd_preparse('<(ROOT)>'));
         die();
