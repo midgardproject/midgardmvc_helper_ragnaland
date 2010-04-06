@@ -5,6 +5,22 @@
  */
 function mgd_register_filter($name, $function)
 {
+    if (!isset($GLOBALS['midgard_filters']))
+    {
+        $GLOBALS['midgard_filters'] = array();
+    }
+    
+    $GLOBALS['midgard_filters']["x{$name}"] = $function;
+}
+
+function mgd_format($content, $name)
+{
+    if (!isset($GLOBALS['midgard_filters'][$name]))
+    {
+        return $content;
+    }
+    
+    return call_user_func($GLOBALS['midgard_filters'][$name], $content);
 }
 
 /**
