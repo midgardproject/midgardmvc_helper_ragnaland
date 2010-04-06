@@ -1,18 +1,24 @@
 <?php
+$GLOBALS['midgard_filters'] = array
+(
+    'h' => 'htmlentities',
+    'u' => 'rawurlencode',
+    'f' => 'nl2br',
+);
+
 /**
  * Register PHP function as string formatter to the Midgard formatting engine.
  * @see http://www.midgard-project.org/documentation/reference-other-mgd_register_filter/
- */
+ */ 
 function mgd_register_filter($name, $function)
 {
-    if (!isset($GLOBALS['midgard_filters']))
-    {
-        $GLOBALS['midgard_filters'] = array();
-    }
-    
     $GLOBALS['midgard_filters']["x{$name}"] = $function;
 }
 
+/**
+ * Return a string as formatted by a Midgard formatter
+ * @see http://www.midgard-project.org/documentation/reference-other-mgd_format/
+ */
 function mgd_format($content, $name)
 {
     if (!isset($GLOBALS['midgard_filters'][$name]))
