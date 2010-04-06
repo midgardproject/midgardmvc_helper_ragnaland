@@ -20,7 +20,9 @@ function mgd_format($content, $name)
         return $content;
     }
     
-    return call_user_func($GLOBALS['midgard_filters'][$name], $content);
+    ob_start();
+    call_user_func($GLOBALS['midgard_filters'][$name], $content);
+    return ob_get_clean();
 }
 
 /**
