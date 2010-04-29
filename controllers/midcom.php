@@ -60,7 +60,7 @@ class midgardmvc_helper_ragnaland_controllers_midcom
         $_MIDGARD['debug'] = false;
         
         $_MIDGARD['host'] = null;
-        $_MIDGARD['style'] = $midgardmvc->context->style_id;
+        $_MIDGARD['style'] = $midgardmvc->context->templatedir_id;
         $_MIDGARD['author'] = 0;
         $_MIDGARD['config'] = array
         (
