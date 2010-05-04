@@ -184,7 +184,7 @@ class midgardmvc_helper_ragnaland_controllers_midcom
         try
         {
             // Send reasonable default content type, MidCOM may still override this
-            header('Content-type: text/html; charset=utf-8');
+            midgardmvc_core::get_instance()->dispatcher->header('Content-type: text/html; charset=utf-8');
             
             // Load Ragnaroek MidCOM
             require_once MIDCOM_ROOT . '/midcom.php';
