@@ -60,7 +60,7 @@ class midgardmvc_helper_ragnaland_controllers_midcom
         $_MIDGARD['debug'] = false;
         
         $_MIDGARD['host'] = null;
-        $_MIDGARD['style'] = $midgardmvc->context->templatedir_id;
+        $_MIDGARD['style'] = 0;
         $_MIDGARD['author'] = 0;
         $_MIDGARD['config'] = array
         (
@@ -126,6 +126,7 @@ class midgardmvc_helper_ragnaland_controllers_midcom
         $GLOBALS['midcom_config_local']['log_level'] = $this->midgardmvc_loglevel_to_midcom(midgardmvc_core::get_instance()->configuration->log_level);
         $GLOBALS['midcom_config_local']['midcom_root_topic_guid'] = $this->get_midcom_root_topic_guid();
         $GLOBALS['midcom_config_local']['midcom_services_rcs_enable'] = false;
+        $GLOBALS['midcom_config_local']['person_class'] = 'midgardmvc_helper_ragnaland_person';
         
         if (midgardmvc_core::get_instance()->firephp)
         {
