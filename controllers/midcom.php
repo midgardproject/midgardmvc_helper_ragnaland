@@ -205,11 +205,18 @@ class midgardmvc_helper_ragnaland_controllers_midcom
      */
     public function get_run(array $args)
     {
+        if (   isset($args['variable_arguments'][0])
+            && substr($args['variable_arguments'][0], 0, 4) == 'mgd:')
+        {
+            throw new midgardmvc_exception_notfound('Not handled by MidCOM');
+        }
         $this->initialize_midcom();
         
         // Run Ragnaroek pseudo-templating
         eval('?>' . mgd_preparse('<(ROOT)>'));
-        die();
+
+        // Finish here
+        midgardmvc_core::get_instance()->dispatcher->end_request();
     }
 
     /**
